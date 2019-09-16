@@ -1,0 +1,76 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<GlobalPlanningModel.Models.Scenario>
+
+@{
+    ViewBag.Title = "Global Planning Model";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Forename
+        </th>
+        <th>
+            UserID
+        </th>
+        <th>
+            SampleDate
+        </th>
+        <th>
+            CreationDate
+        </th>
+        <th>
+            NumMonths
+        </th>
+        <th>
+            MarketID
+        </th>
+        <th>
+            NetworkLayerID
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SampleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumMonths)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetworkLayerID)
+            </td>
+        </tr>
+    }
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
